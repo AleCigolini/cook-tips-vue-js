@@ -17,7 +17,7 @@
     </header>
   </template>
   
-  <!-- The styles will be applied just for the own component itself -->
+  <!-- The styles will be applied just for the component itself -->
   <style scoped>
   .banner {
     padding: 4rem 7.5rem;
