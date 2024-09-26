@@ -2,12 +2,12 @@
 import type { PropType } from 'vue';
 import Tag from './Tag.vue';
 
-    export default {
-        props: {
-            ingredientes: { type: Array as PropType<String[]>, required: true }
-        },
-        components: { Tag }
-    }
+export default {
+    props: {
+        ingredientes: { type: Array as PropType<string[]>, required: true }
+    },
+    components: { Tag }
+}
 </script>
 
 <template>
@@ -19,7 +19,7 @@ import Tag from './Tag.vue';
       <ul v-if="ingredientes.length" class="ingredientes-sua-lista">
         <!-- :key helps Vue to render the content and prevent console errors. -->
         <li v-for="ingrediente in ingredientes" :key="ingrediente">
-          <Tag :texto="(ingrediente as string)" ativa />
+          <Tag :texto="ingrediente" ativa />
         </li>
       </ul>
 
@@ -30,7 +30,7 @@ import Tag from './Tag.vue';
     </section>
 </template>
 
-<style>
+<style scoped>
 .sua-lista-texto {
   color: var(--coral, #F0633C);
   display: block;
