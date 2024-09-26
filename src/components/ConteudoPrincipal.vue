@@ -2,15 +2,29 @@
 import SelecionarIngredientes from './SelecionarIngredientes.vue'
 import Tag from './Tag.vue';
 import SuaLista from './SuaLista.vue';
+import BotaoPrincipal from './BotaoPrincipal.vue';
+import Rodape from './Rodape.vue';
 
 export default {
     data() {
         return {
-            ingredientes: ['Alho', 'Manteiga', 'Orégano']
+            ingredientes: [] as string[]
         }
     },
 
-    components: { SelecionarIngredientes, Tag, SuaLista }
+    components: { SelecionarIngredientes, Tag, SuaLista , BotaoPrincipal, Rodape },
+    methods: {
+      adicionarIngrediente(ingrediente: string) {
+        this.ingredientes.push(ingrediente);
+      },
+
+      removerIngrediente(ingrediente: string) {
+        if (this.ingredientes.length) {
+          const index = this.ingredientes[ingrediente];
+          this.ingredientes.splice(index, 1);
+        }
+      }
+    }
 }
 </script>
 
@@ -19,7 +33,14 @@ export default {
     
     <SuaLista :ingredientes="ingredientes" />
 
-    <SelecionarIngredientes />
+    <SelecionarIngredientes
+      @adicionar-ingrediente="adicionarIngrediente($event)"
+      @remover-ingrediente="removerIngrediente($event)"
+    />
+
+    <BotaoPrincipal />
+
+    <Rodape />
   </main>
 </template>
 
