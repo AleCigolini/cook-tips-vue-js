@@ -2,7 +2,6 @@
 import SelecionarIngredientes from './SelecionarIngredientes.vue'
 import Tag from './Tag.vue';
 import SuaLista from './SuaLista.vue';
-import Rodape from './Rodape.vue';
 import MostrarReceitas from './MostrarReceitas.vue';
 
 type Pagina = 'SelecionarIngredientes' | 'MostrarReceitas';
@@ -15,7 +14,7 @@ export default {
         }
     },
 
-    components: { SelecionarIngredientes, Tag, SuaLista, Rodape , MostrarReceitas },
+    components: { SelecionarIngredientes, Tag, SuaLista , MostrarReceitas },
     methods: {
       adicionarIngrediente(ingrediente: string) {
         this.ingredientes.push(ingrediente);
@@ -55,8 +54,6 @@ export default {
         @buscar-ingredientes="navegar('SelecionarIngredientes')"
       />
     </KeepAlive>
-
-    <Rodape />
   </main>
 </template>
 
