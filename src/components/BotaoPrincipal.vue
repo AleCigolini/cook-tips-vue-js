@@ -1,6 +1,14 @@
+<script lang="ts">
+    export default {
+        props: {
+            texto: { type: String, required: true }
+        }
+    }
+</script>
+
 <template>
     <button class="botao-principal">
-        Buscar receitas!
+        {{ texto }}
     </button>
 </template>
 

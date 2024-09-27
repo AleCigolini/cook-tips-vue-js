@@ -1,9 +1,9 @@
 <template>
-    <div class="rodape">
+    <foooter class="rodape">
         <span class="texto">
             Desenvolvido por Alessandro | 2024 - Projeto fictício sem fins comerciais.
         </span>
-    </div>
+    </foooter>
 </template>
 
 <style scoped>

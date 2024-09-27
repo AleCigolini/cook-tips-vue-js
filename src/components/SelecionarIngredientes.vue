@@ -2,8 +2,10 @@
 import { getCategories } from '@/http/index';
 import CardCategoria from './CardCategoria.vue';
 import type ICategoria from '@/interfaces/ICategoria';
+import BotaoPrincipal from './BotaoPrincipal.vue';
 
 export default {
+    name: 'SelecionarIngredientes',
     data() {
         return {
             // HOW TO SET A TYPE FOR THE VARIABLE
@@ -15,8 +17,8 @@ export default {
     async created() {
         this.categories = await getCategories();
     },
-    components: { CardCategoria },
-    emits: [ 'adicionarIngrediente', 'removerIngrediente' ]
+    components: { CardCategoria, BotaoPrincipal },
+    emits: [ 'adicionarIngrediente', 'removerIngrediente', 'buscarReceitas' ]
 }
 </script>
 
@@ -43,6 +45,9 @@ export default {
         <p class="paragrafo dica">
             *Atenção: consideramos que você tem em casa sal, pimenta e água.
         </p>
+
+        <!-- SET EVENTS DIRECTLY ON THE COMPONENT IS CALLED "FALLTROUGHT ATTRIBUTES" -->
+        <BotaoPrincipal texto="Buscar receitas!!" @click="$emit('buscarReceitas')"/>
     </section>
 </template>
 

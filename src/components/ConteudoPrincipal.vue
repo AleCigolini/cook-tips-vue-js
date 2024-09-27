@@ -2,17 +2,20 @@
 import SelecionarIngredientes from './SelecionarIngredientes.vue'
 import Tag from './Tag.vue';
 import SuaLista from './SuaLista.vue';
-import BotaoPrincipal from './BotaoPrincipal.vue';
 import Rodape from './Rodape.vue';
+import MostrarReceitas from './MostrarReceitas.vue';
+
+type Pagina = 'SelecionarIngredientes' | 'MostrarReceitas';
 
 export default {
     data() {
         return {
-            ingredientes: [] as string[]
+            ingredientes: [] as string[],
+            conteudo: 'SelecionarIngredientes' as Pagina
         }
     },
 
-    components: { SelecionarIngredientes, Tag, SuaLista , BotaoPrincipal, Rodape },
+    components: { SelecionarIngredientes, Tag, SuaLista, Rodape , MostrarReceitas },
     methods: {
       adicionarIngrediente(ingrediente: string) {
         this.ingredientes.push(ingrediente);
@@ -23,6 +26,10 @@ export default {
           const index = this.ingredientes[ingrediente];
           this.ingredientes.splice(index, 1);
         }
+      },
+
+      navegar(pagina: Pagina) {
+        this.conteudo = pagina;
       }
     }
 }
@@ -31,14 +38,23 @@ export default {
 <template>
     <main class="conteudo-principal">
     
-    <SuaLista :ingredientes="ingredientes" />
+    <SuaLista v-if="conteudo === 'SelecionarIngredientes'" :ingredientes="ingredientes" />
 
-    <SelecionarIngredientes
-      @adicionar-ingrediente="adicionarIngrediente($event)"
-      @remover-ingrediente="removerIngrediente($event)"
-    />
-
-    <BotaoPrincipal />
+    <!-- TO KEEP THE COMPONENT IN CACHE AS INACTIVE -->
+    <KeepAlive include="SelecionarIngredientes">
+      <SelecionarIngredientes
+        v-if="conteudo === 'SelecionarIngredientes'"
+        @adicionar-ingrediente="adicionarIngrediente($event)"
+        @remover-ingrediente="removerIngrediente($event)"
+        @buscar-receitas="navegar('MostrarReceitas')"
+      />
+  
+      <MostrarReceitas 
+        v-else-if="conteudo === 'MostrarReceitas'"
+        :ingredientes="ingredientes"
+        @buscar-ingredientes="navegar('SelecionarIngredientes')"
+      />
+    </KeepAlive>
 
     <Rodape />
   </main>
